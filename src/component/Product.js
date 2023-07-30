@@ -20,6 +20,7 @@ const Product = () => {
       console.log(response);
       setproductsData(response.data);    
       setFilteredData(response.data);
+      dispatch({type:"ALL_PRODUCTS",data:response.data});
       setLoading(false);
     })).catch((err)=>{
       alert(err.message);
@@ -27,8 +28,6 @@ const Product = () => {
       setLoading(false);
     });
      }
-
-
      const handlePdp = (data)=>{
       setispdp(true);
       setisSelectionBoard(false);
@@ -39,8 +38,20 @@ const Product = () => {
         setispdp(false);
         setshowProduts(true);
         setisSelectionBoard(true);
+        setFilteredData(productsData); //
      }
     useEffect(() => {
+      const savedData = JSON.parse(localStorage.getItem('allProducts'));
+     if(totalData && totalData.allProducts) {
+      setproductsData(totalData.allProducts);
+      setFilteredData(totalData.allProducts);
+      setLoading(false);
+     }else if( savedData && Object.keys(savedData).length > 0) {
+        setproductsData(savedData);
+        setFilteredData(savedData);
+        setLoading(false);
+     }
+      else  
      getProducts();
     }, [])
     const handleSearch = (e)=>{
@@ -60,11 +71,11 @@ const Product = () => {
     </div>
       {
    
-        loading ? <div className='loading-div' > <div className='spinner'></div></div> :( showProduts &&
+        loading ? <h2 style={{marginTop:'30vh'}}>Loading...</h2> :( showProduts &&
           filteredData.map((each)=>{
             return (
-                <div onClick={()=>handlePdp(each)} className='each-product' key={each.id} style={{width:'300px',height:'300px',border:'1px solid gray',padding:'10px'}}>
-                  <div style={{width:'100%',height:'80%'}}> <img style={{width: '100%',
+                <div key={each._id} onClick={()=>handlePdp(each)} className='each-product'  style={{width:'300px',height:'300px',border:'1px solid gray',padding:'10px'}}>
+                  <div style={{width:'100%',height:'80%'}}> <img className='product-image' style={{width: '100%',
                     height: '100%',objectFit:'contain'}} src={`data:image/jpeg;base64,${each.image.imageData}`}/> </div>
                     <div className='product-details'>
                     <div>{each.title}</div>

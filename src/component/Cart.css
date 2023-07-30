@@ -1,9 +1,12 @@
 @media (max-width:768px) {
 .main-div {
 padding: 0px !important;
-row-gap: 50px !important;
+row-gap: 0px !important;
 margin-top: 20px;
 width: 98% !important;
+}
+.cart-text {
+    font-size: 16px !important;
 }
 .inner-div {
 row-gap: 15px !important;
@@ -13,8 +16,9 @@ row-gap: 15px !important;
     width: 74% !important;
     height: 80px !important;
 }
-img {
+.item-image {
     height: 80% !important;
+    width: 30% !important;
 }
 .details {
     display: flex !important;

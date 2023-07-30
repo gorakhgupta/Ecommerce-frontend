@@ -1,5 +1,5 @@
 import React ,{useEffect,useState}from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import Cart from './Cart';
 const Order = () => {
   const cartItemsData = useSelector((state)=>state.userReducer);
@@ -7,10 +7,12 @@ const Order = () => {
   const [orders, setorders] = useState([]);
   const [loading, setloading] = useState(true);
   const [error, seterror] = useState();
+  const dispatch = useDispatch();
   const getOrdersData = ()=>{
     fetch('https://ecommerce-backend-h4rl.onrender.com/getOrders').then((response)=>
     response.json().then((result)=>{
     setorders(result.data);
+     dispatch({type:"ALL_ORDERS",data: result.data});
     setloading(false);
     })
     ).catch((error)=>{
@@ -19,7 +21,11 @@ const Order = () => {
     })
   }
   useEffect(() => {
-   getOrdersData();
+    if(cartItemsData && cartItemsData.ordersData) {
+      setloading(false);
+    }else{
+  //  getOrdersData();
+    }
   }, [])
   if(error) {
     return <h1>Error while fetching data</h1>

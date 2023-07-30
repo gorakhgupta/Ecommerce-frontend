@@ -78,8 +78,17 @@ const useReducer = (initialState={},action)=>{
         case  "NEED_API":{
        return {...initialState,shouldCallApi : action.data.shouldApiCall}
         }
+        case  "ALL_PRODUCTS":{
+            localStorage.setItem("allProducts",JSON.stringify(action.data));
+            return {...initialState,allProducts : action.data}
+         }
+        case  "ALL_ORDERS":{
+            return {...initialState,ordersData : action.data}
+        }
+        case "LOGIN" : {
+            return {...initialState,loginData : action.data}
+        }
 
-        // NEED_API
         default:
             return initialState;    
     }

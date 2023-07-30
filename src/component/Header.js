@@ -24,13 +24,13 @@ const Header = () => {
      <Link  onClick={handleVisited} name = "0" to="/">Home</Link>
      </li>
      <li className={`${linkVisited == 1 && 'bg-active'}`}>
-     <Link onClick={handleVisited} name = "1" to="/profile"> {isloggedIn ? 'Profile' : 'LogIn/SignUp'}</Link>
+     <Link onClick={handleVisited} name = "1" to="/profile">Account</Link>
      </li>
      <li className={`${linkVisited == 2 && 'bg-active'}`} >
      <Link onClick={handleVisited} name = "2" to="/admin">Admin</Link>
      </li>
      <li  className={`${linkVisited == 3 && 'bg-active'}`}>
-     <Link onClick={handleVisited} name = "3" to="/cart">Cart<sup style={{color:'blue'}}>{cartStoreData && cartStoreData.productData && cartStoreData.productData.length ? cartStoreData.productData.length : 0}</sup></Link>
+     <Link onClick={handleVisited} name = "3" to="/cart">Cart<sup style={{color:'white'}}>{cartStoreData && cartStoreData.productData && cartStoreData.productData.length ? cartStoreData.productData.length : 0}</sup></Link>
      </li>
      <li className={`${linkVisited == 5 && 'bg-active'}`}>
      <Link onClick={handleVisited} name = "5" to="/orders">Orders</Link>

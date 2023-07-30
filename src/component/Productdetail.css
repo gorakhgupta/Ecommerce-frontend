@@ -39,7 +39,7 @@
     outline: none  !important;
 } 
 .bg-green {
-    background-color: green ;
+    background-color: #29e00c !important ;
     color: #ffffff;
     outline: none !important;
 }
@@ -54,7 +54,7 @@
     width: 85% !important;
     display: flex !important;
     flex-direction: column !important;
-    row-gap: 20px !important;
+    row-gap: 12px !important;
     justify-content: center !important;
     align-items: center !important;
 }
@@ -74,7 +74,10 @@
     margin: auto !important;
     flex-direction: column !important;
     align-items: center !important;
-    row-gap: 50px !important;
+    row-gap: 10px !important;
+}
+.title, .description {
+    margin-bottom: 0px !important;
 }
 .back-arrow{
     margin: 0px 0px 10px 23px !important;

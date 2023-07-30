@@ -19,6 +19,26 @@
 .search-product {
   width: 94.5%;
 }
+@media (max-width: 768px) {
+.each-product {
+  width: 121px !important;
+  height: 130px !important;
+}
+.search-product {
+  width: 92% !important;
+  margin: 0 auto;
+}
+.search-input{
+  width: 92% !important;
+}
+.product-image {
+  height: 80% !important;
+}
+.product-main-div{
+  row-gap: 20px !important;
+  column-gap: 29px !important;
+}
+}
 .search-input {
   height: 4vh;
   padding: 4px;

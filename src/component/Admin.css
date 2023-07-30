@@ -79,20 +79,18 @@ button {
     color: orangered;
     padding: 10px;
     margin: auto;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    text-align: center;
 }
-@media (max-width: 768px) {
 
-    .modify-text{
-        font-size: 20px !important;
-    }
+@media (max-width: 768px) {
     .items-div{
         width: 33% !important;
         row-gap: 38px !important;
     }
     .form-div {
         width: 92% !important;
-        margin: 20px auto !important;
+        margin: 0 auto !important;
 
     }
     .all-product-div{
@@ -100,7 +98,8 @@ button {
         margin-top: 50px;
     }
     .main-div{
-        flex-direction: row !important;
+        flex-direction: column !important;
+        
     } 
     .modify-text{
         position: absolute;

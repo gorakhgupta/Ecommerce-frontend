@@ -1,11 +1,12 @@
 import React, {useRef, useState,useEffect} from 'react'
 import './Admin.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 const Admin = () => {
   const [imgUrl, setimgUrl] = useState();
   const [notice, setnotice] = useState(false);
   const formRef = useRef(null);
   const dispatch = useDispatch();
+  const totalData = useSelector(state=>state.userReducer);
   const [allproducts, setallproducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [productDetails, setproductDetails] = useState({
@@ -50,6 +51,7 @@ const Admin = () => {
       console.log(result);
       setnotice(true);
       setLoading(false);
+      getProducts();
       dispatch({type:"NEED_API",data:{shouldApiCall :true}})
       setTimeout(() => {
         setnotice(false);
@@ -71,9 +73,11 @@ const Admin = () => {
   }
 
   function getProducts() {
+    setLoading(true);
     fetch('https://ecommerce-backend-h4rl.onrender.com/products').then((res)=>res.json().then((response)=>{
       console.log(response);
-      setallproducts(response.data);    
+      setallproducts(response.data);  
+      dispatch({type:"ALL_PRODUCTS",data:response.data});  
       setLoading(false);
     })).catch((err)=>{
       alert(err.message);
@@ -82,21 +86,26 @@ const Admin = () => {
      }
 
   useEffect(() => {
-    getProducts();
+    if(totalData && totalData.allProducts) {
+      setallproducts(totalData.allProducts);
+      setLoading(false);
+     } else  
+     getProducts();
   }, [])
   
   return (
     <div style={{display:'flex',width:'100%',justifyContent:'center',marginTop:'20px',height:'100%',marginBottom:'65px',flexDirection:'column'}}>
-  <div className='main-div'>
+  {!loading && <div style={{margin: '0 auto 20px auto',color:'dodgerblue',fontWeight:'700',fontSize:'24px'}} className='modify-message'>Hey! Modify Your Shop Now!</div>}
+    <div className='main-div'>
     <div className='main-sub' style={{width:'90%',display:'flex'}}>
-      {loading && <div className='loading-div' > <div className='spinner'></div></div>}
+      {loading && <h2 style={{margin:'30vh auto'}}>Loading...</h2>}
     { allproducts && !loading &&  <div className='all-product-div' style={{width:'50%'}}>
       <div className='main-container-items'>
-      
+    
       {allproducts.map((each,ind)=>{
       
         return (
-          <div className='items-div'>
+          <div key={each._id} className='items-div'>
           <div className='image-price-div' style={{width:'100%',height:'50px',columnGap:'10px',alignItems:'center',display:'flex'}}>
           <img className='images' style={{objectFit:'contain',width:'100%',height:'100%'}} src={`data:image/jpeg;base64,${each.image.imageData}`} />
           <div style={{maxWidth:'80px',minWidth:'80px',fontSize:'10px'}}>{each.title}</div>
@@ -111,12 +120,8 @@ const Admin = () => {
         )
       })}
       </div>
-      <div className='modify-text'>
-      Hi Welcome, Modify Your Shop!
-      </div>
-
       </div>}
-   
+   { !loading && 
     <form className='form-div' style={{width:'50%'}}  ref={formRef} action="">
     <div > <div className='margin-5' >Product Name</div> <input value={productDetails.title} name='title' placeholder='Please enter the Product Name' className='input-field' onChange={handleProductChange} style={{width:'100%'}} type="text" /></div>
     <div > <div className='margin-5' >Product Description</div> 
@@ -135,6 +140,7 @@ const Admin = () => {
     <button onClick={handleAddProducts} >Add</button>
    { notice &&  !loading && <div style={{backgroundColor:'green',position:'absolute',left:'43%',bottom:'7%',color:'#ffffff',padding:'12px',borderRadius:'10px'}}>Product Added successfully</div> }
     </form>
+  }
     </div>
 </div>
     </div>

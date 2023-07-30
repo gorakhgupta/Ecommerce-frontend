@@ -4,7 +4,6 @@
     align-items: center;
     row-gap: 50px;
     color: black;
-    font-weight: 700;
     width: 45%;
     margin: auto;
     justify-content: center;
@@ -76,6 +75,9 @@ background-color: green !important;
         width: 90%;
 
     }
+    select {
+        width: 97% !important;
+    }
     .main-profile {
         width: 100%;
         row-gap: 50px;
@@ -84,6 +86,9 @@ background-color: green !important;
     input, select {
         border: none;
         outline: 1px solid gray;
+    }
+    .main-profile {
+    row-gap: 0px !important;
     }
 }
 

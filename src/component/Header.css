@@ -11,15 +11,7 @@
     display: flex;
     height: 7vh;
     padding: 0 30px 0 0;
-    background: tan;
-}
-@media (max-width: 767px) {
-    .header-container{
-        padding: 0px !important;
-    }
-    ul li {
-        padding: 0 !important;
-    }
+    background: #29e00c;
 }
 ul li {
     padding: 6px;
@@ -44,16 +36,30 @@ ul li:hover {
     align-items: center;
 }
 .bg-active{
-    background-color: aqua !important;
+    background-color: #ffad2c !important;
 }
 .navlinks img {
 object-fit: contain;
 }
 @media (max-width: 768px) {
 .link-container{
-    column-gap: 0px !important;
+    column-gap: 14px !important;
+}
+li{
+    display: flex;
+    align-items: center;
 }
 .header-container {
     align-items: center !important;
+    padding: 0px !important;
+}
+.navlinks {
+    width: 89% !important;
+}
+a{
+    color: #ffffff !important;
+}
+ul li {
+    padding: 0 !important;
 }
 }

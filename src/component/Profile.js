@@ -1,10 +1,13 @@
 import React, { useState ,useEffect} from 'react'
 import './Profile.css';
+import { useDispatch , useSelector} from 'react-redux';
 const Profile = () => {
   const [issigup,setissigup] = useState(true);
+  const dispatch = useDispatch();
+  const totalData = useSelector(state=>state.userReducer);
   const [verified,setverified] = useState(false);
   const [logindata,setlogindata] = useState({});
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   const [formData,setFormData] = useState({
     name: '',
     mobile:'',
@@ -17,6 +20,7 @@ const Profile = () => {
   }
   const handleSubmit = (e)=>{
     e.preventDefault();
+    setloading(true);
     let requiredUrl = 'https://ecommerce-backend-h4rl.onrender.com/';
     if(issigup) {
       requiredUrl += 'register';
@@ -35,40 +39,51 @@ const Profile = () => {
             alert('Wrong credentials');
             return;
           }
-          setlogindata(result.data);
+        setlogindata(result.data);
+        dispatch({type:"LOGIN",data:result.data});
         console.log(result);
         setissigup(false);
         setloading(false);
       })
     }).catch((err)=>{
       console.log('Error: ' + err);
+      setloading(false);
+    });
+    setFormData({
+      name: '',
+      mobile:'',
+      gender:'',
+      email :'',
+      password:''
     });
   }
-
   const handleLogout = ()=>{
     setissigup(true);
     setlogindata({});
   }
-  useEffect(() => {
 
-  }, [])
+  useEffect(()=>{
+if(totalData && totalData.loginData) {
+  setlogindata(totalData.loginData);
+}
+  },[]);
   return (
 
     
     <div className='main-profile'>
-    { !loading && !(logindata.name) && 
+    {loading && <h2 style={{marginTop:'30vh'}}>Loading ...</h2>}
+    {  !Object.keys(logindata).length && !loading &&
       <div style={{textAlign:'center'}}>
-      <div onClick={()=>setissigup(false)} >Already Registered? <span style={{textDecoration:'underline'}}>Login Here</span> </div>
+      <div onClick={()=>setissigup(!issigup)} >Already Registered? <span style={{textDecoration:'underline'}}>{!issigup ? 'Signup' : 'Login'}</span> </div>
       </div>
 
     }
 
-      { (!logindata.name && !loading) ? <div className='main-login'>
-      <div className='login'>
-
-      
+      {!Object.keys(logindata).length && !loading &&  <div className='main-login'>
+      <div className='login'>   
     <form onSubmit={handleSubmit} action="">
-    {issigup && 
+
+    {issigup && !loading && 
     <div className='name-mobile-gender'>  
    <div  > Name : <br/> <input value={formData.name} onChange={handleChange} name='name' type="text" required placeholder='Enter Your Name'/> </div>
     <div>Mobile : <br/> <input value={formData.mobile} onChange={handleChange}  name='mobile' type="mobile" required  placeholder='Enter Your Mobile No'/></div>
@@ -86,14 +101,17 @@ const Profile = () => {
 
     </form>
     </div>
-</div> : 
-
+</div> 
+      }
+{Object.keys(logindata).length > 0 && !loading && 
 
 <div className='success-login'> 
  Hello, {logindata ? logindata.name : 'Guest'} Congratualations, Successfully Logged In !
  <div className='logout' onClick={handleLogout} >Log Out</div>
 </div>
 }
+    
+
     </div>
   )
 }

@@ -28,13 +28,13 @@ const Cart = ({ordersData,wishlistData,fromOrders,fromWishlist}) => {
   return (
     <div className='main-div' style={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center',width:'40%',border:'1px solid dodgerblue',margin:'auto',padding:'20px',rowGap:'50px',marginTop:'20px'}}>
        {
-        !cartItems.length ? <h1>Your {wishlistData ? 'WishList' : 'Cart'}  is Empty <span>Shop Now</span> </h1> :
-        cartItems.map((each)=> {
+        !cartItems.length ? <h1 className='cart-text'>Your {wishlistData ? 'WishList' :fromOrders ? 'Order' : 'Cart'}  is Empty <span>Shop Now</span> </h1> :
+        cartItems.map((each,ind)=> {
           return (
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
+            <div key={ind} style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
             <div className='inner-div' style={{display:'flex',alignItems:'center',columnGap:'20px',padding:'10px',justifyContent:'space-between',width:'100%'}}>
             <div className='sub-inner' style={{width:'100px',height:'100px',display:'flex',columnGap:'50px',alignItems:'center'}}>
-            <img style={{width:'100%',height:'100%',objectFit:'contain'}}  src={`data:image/jpeg;base64,${each.image.imageData}`} alt="" />
+            <img className='item-image' style={{width:'100%',height:'100%',objectFit:'contain'}}  src={`data:image/jpeg;base64,${each.image.imageData}`} alt="" />
             <div style={{display:'flex',columnGap:'20px'}}>
             <div onClick={()=>handleDispatch("add",each)} style={{padding:'2px',minWidth:'2rem',height:'4vh'
             ,background:'green',color:'#ffffff',textAlign:'center',cursor:'pointer'}}>
@@ -51,7 +51,7 @@ const Cart = ({ordersData,wishlistData,fromOrders,fromWishlist}) => {
             <div>
             {each.title}
             </div>
-            <div>Price : Rs.{each.price}/-</div>
+            <div> Rs.{each.price}/-</div>
             <div>Quantity : {each.count ? each.count :  each.quantity ? each.quantity : 1}</div>
             </div>
            </div>
