@@ -1,0 +1,27 @@
+@media (max-width:768px) {
+.main-div {
+padding: 0px !important;
+row-gap: 50px !important;
+margin-top: 20px;
+width: 98% !important;
+}
+.inner-div {
+row-gap: 15px !important;
+}
+.sub-inner {
+    column-gap: 16px !important;
+    width: 74% !important;
+    height: 80px !important;
+}
+img {
+    height: 80% !important;
+}
+.details {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    justify-content: center !important;
+    /* margin: auto; */
+    align-items: center !important;
+}
+}

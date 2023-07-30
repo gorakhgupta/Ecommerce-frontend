@@ -1,0 +1,136 @@
+button {
+    margin: 0 auto;
+    border: none;
+    padding: 10px;
+    max-width: 10rem;
+    min-width: 8rem;
+    background: dodgerblue;
+    color: white;
+}
+.edit {
+    display: inline-block;
+    padding: 7px 12px;
+    background-color: orange;
+    border-radius: 29px;
+    color: white;
+    text-align: center;
+}
+.items-div {
+    max-width: 45%;
+    width: 41%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    border: 1px solid gray;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+}
+.main-container-items {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 42px;
+    row-gap: 36px;
+}
+.delete {
+    display: inline-block;
+    padding: 7px 12px;
+    background-color: red;
+    border-radius: 29px;
+    color: white;
+    text-align: center;
+}
+.input-field {
+   
+    border: 1px solid gray !important;
+    padding: 0 8px;
+}
+.add-product-text {
+    color: white;
+    margin-left: 4px;
+    background-color: orange;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 1px 2px 11px 8px gray;
+    margin-bottom: 10px;
+}
+
+*{
+    font-weight: 600;
+}
+.margin-5 {
+    margin: 5px;
+}
+::placeholder {
+    color: gray !important;
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: 200;
+}
+.main-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.modify-text{
+    font-size: 25px;
+    font-weight: 700;
+    color: orangered;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px
+}
+@media (max-width: 768px) {
+
+    .modify-text{
+        font-size: 20px !important;
+    }
+    .items-div{
+        width: 33% !important;
+        row-gap: 38px !important;
+    }
+    .form-div {
+        width: 92% !important;
+        margin: 20px auto !important;
+
+    }
+    .all-product-div{
+        width: 100% !important;
+        margin-top: 50px;
+    }
+    .main-div{
+        flex-direction: row !important;
+    } 
+    .modify-text{
+        position: absolute;
+        top: 7%;
+    }
+    .main-sub {
+        flex-direction: column-reverse !important;
+        width: 100% !important;
+    }
+    .edit-del{
+        column-gap: 10px !important;
+        font-size: 12px !important;
+    }
+    .image-price-div {
+        height: 94px !important;
+
+    }
+    .main-container-items {
+        justify-content: center !important;
+    }
+    input {
+        width: 96% !important;
+    }
+    textarea {
+        width: 95% !important;
+    }
+    .images{
+        height: 80% !important;
+    }
+    .image-price-div {
+        flex-direction: column !important;
+    }
+}
