@@ -71,7 +71,7 @@ const Product = () => {
     </div>
       {
    
-        loading ? <h2 style={{marginTop:'30vh'}}>Loading...</h2> :( showProduts &&
+        loading ? <h2 style={{marginTop:'30vh'}}>Loading ...</h2> :( showProduts &&
           filteredData.map((each)=>{
             return (
                 <div key={each._id} onClick={()=>handlePdp(each)} className='each-product'  style={{width:'300px',height:'300px',border:'1px solid gray',padding:'10px'}}>

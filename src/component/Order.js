@@ -5,7 +5,7 @@ const Order = () => {
   const cartItemsData = useSelector((state)=>state.userReducer);
   const OrdersData =   (cartItemsData && cartItemsData.ordersData) ? cartItemsData.ordersData : []; 
   const [orders, setorders] = useState([]);
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   const [error, seterror] = useState();
   const dispatch = useDispatch();
   const getOrdersData = ()=>{
@@ -23,8 +23,6 @@ const Order = () => {
   useEffect(() => {
     if(cartItemsData && cartItemsData.ordersData) {
       setloading(false);
-    }else{
-  //  getOrdersData();
     }
   }, [])
   if(error) {
@@ -34,7 +32,7 @@ const Order = () => {
 
     <div>
     {
-      loading ? <div className='loading-div'> <div className='spinner'></div> </div> : 
+      loading ? <h2 style={{marginTop:'30vh'}}>Loading ...</h2> : 
     <div style={{display:'flex',width:'100%',justifyContent:'center'}}>
     <Cart ordersData = {orders}  fromOrders =  {true} /> 
     </div>

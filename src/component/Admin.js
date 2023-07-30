@@ -98,7 +98,7 @@ const Admin = () => {
   {!loading && <div style={{margin: '0 auto 20px auto',color:'dodgerblue',fontWeight:'700',fontSize:'24px'}} className='modify-message'>Hey! Modify Your Shop Now!</div>}
     <div className='main-div'>
     <div className='main-sub' style={{width:'90%',display:'flex'}}>
-      {loading && <h2 style={{margin:'30vh auto'}}>Loading...</h2>}
+      {loading && <h2 style={{margin:'30vh auto'}}>Loading ...</h2>}
     { allproducts && !loading &&  <div className='all-product-div' style={{width:'50%'}}>
       <div className='main-container-items'>
     
