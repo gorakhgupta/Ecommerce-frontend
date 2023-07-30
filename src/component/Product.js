@@ -16,13 +16,10 @@ const Product = () => {
     const totalData = useSelector(state=>state.userReducer);
 
     function getProducts() {
-    fetch('http://localhost:5000/products').then((res)=>res.json().then((response)=>{
+    fetch('https://ecommerce-backend-h4rl.onrender.com/products').then((res)=>res.json().then((response)=>{
       console.log(response);
       setproductsData(response.data);    
       setFilteredData(response.data);
-      if(response.data) {
-        localStorage.setItem('products', JSON.stringify(response.data));
-      }
       setLoading(false);
     })).catch((err)=>{
       alert(err.message);
@@ -44,16 +41,7 @@ const Product = () => {
         setisSelectionBoard(true);
      }
     useEffect(() => {
-      const productsData = localStorage.getItem('products');
-      if(productsData && totalData && !totalData.shouldCallApi) {
-        const resultData = JSON.parse(productsData);
-        setproductsData(resultData);    
-        setFilteredData(resultData);
-        setLoading(false);
-      } else{
      getProducts();
-     dispatch({type:"NEED_API",data: {shouldCallApi: false}}); 
-      }
     }, [])
     const handleSearch = (e)=>{
       const searchText = searchRef.current.value;

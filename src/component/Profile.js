@@ -17,7 +17,7 @@ const Profile = () => {
   }
   const handleSubmit = (e)=>{
     e.preventDefault();
-    let requiredUrl = 'http://localhost:5000/';
+    let requiredUrl = 'https://ecommerce-backend-h4rl.onrender.com/';
     if(issigup) {
       requiredUrl += 'register';
     }else {
@@ -36,7 +36,6 @@ const Profile = () => {
             return;
           }
           setlogindata(result.data);
-          localStorage.setItem('logindata', JSON.stringify(result.data));
         console.log(result);
         setissigup(false);
         setloading(false);
@@ -49,18 +48,8 @@ const Profile = () => {
   const handleLogout = ()=>{
     setissigup(true);
     setlogindata({});
-    localStorage.removeItem('logindata');
   }
   useEffect(() => {
-    const loginData  = localStorage.getItem('logindata');
-    if(loginData) {
-        setlogindata(JSON.parse(loginData));
-        setissigup(false);
-        setloading(false);
-    }else{
-      setissigup(true);
-      setloading(false);
-    }
 
   }, [])
   return (

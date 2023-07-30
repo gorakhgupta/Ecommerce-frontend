@@ -42,14 +42,14 @@ const Admin = () => {
    if (productDetails.image) {
      formData.append('image', productDetails.image);
    }
-   fetch('http://localhost:5000/addProduct',{
+   fetch('https://ecommerce-backend-h4rl.onrender.com/addProduct',{
     method:'POST',
     body: formData,
    }).then((response)=>{
     response.json().then((result)=>{
       console.log(result);
-      getProducts();
       setnotice(true);
+      setLoading(false);
       dispatch({type:"NEED_API",data:{shouldApiCall :true}})
       setTimeout(() => {
         setnotice(false);
@@ -57,6 +57,7 @@ const Admin = () => {
     })
    }).catch((error)=>{
     alert("Product added failed");
+    setLoading(false);
    })
    setimgUrl();
    formRef.current.reset();
@@ -70,13 +71,10 @@ const Admin = () => {
   }
 
   function getProducts() {
-    fetch('http://localhost:5000/products').then((res)=>res.json().then((response)=>{
+    fetch('https://ecommerce-backend-h4rl.onrender.com/products').then((res)=>res.json().then((response)=>{
       console.log(response);
       setallproducts(response.data);    
       setLoading(false);
-      if(response.data) {
-        localStorage.setItem('products', JSON.stringify(response.data));
-      }
     })).catch((err)=>{
       alert(err.message);
       setLoading(false);
@@ -84,16 +82,7 @@ const Admin = () => {
      }
 
   useEffect(() => {
-    const products = localStorage.getItem('products');
-    console.log(products);
-    if(products) {
-      console.log(products);
-      const res = JSON.parse(products);
-      if(res) {
-        setallproducts(res);
-        setLoading(false);
-      }
-    }
+    getProducts();
   }, [])
   
   return (
@@ -122,7 +111,9 @@ const Admin = () => {
         )
       })}
       </div>
-
+      <div className='modify-text'>
+      Hi Welcome, Modify Your Shop!
+      </div>
 
       </div>}
    
@@ -145,9 +136,6 @@ const Admin = () => {
    { notice &&  !loading && <div style={{backgroundColor:'green',position:'absolute',left:'43%',bottom:'7%',color:'#ffffff',padding:'12px',borderRadius:'10px'}}>Product Added successfully</div> }
     </form>
     </div>
-</div>
-<div className='modify-text'>
-Hi Welcome, Modify Your Shop!
 </div>
     </div>
   )
